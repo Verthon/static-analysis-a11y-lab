@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from "react-router";
 
 import { routesConfig } from "./routesConfig";
 import { PageLoader } from "../design-system/PageLoader/PageLoader";
+import { MainLayout } from "../layout/MainLayout";
 
 type LazyComponent = React.LazyExoticComponent<() => JSX.Element>;
 
@@ -15,9 +16,9 @@ const ContactPage: LazyComponent = lazy(
 );
 
 const RootLayout = () => (
-  <>
+  <MainLayout>
     <Outlet />
-  </>
+  </MainLayout>
 );
 
 export const AppRoutes = () => (

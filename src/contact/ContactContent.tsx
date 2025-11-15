@@ -1,7 +1,7 @@
-import { Box } from './design-system/Box/Box';
-import { Heading } from './design-system/Heading/Heading';
-import { Typography } from './design-system/Typography/Typography';
-import { useTranslation } from './i18n/useTranslation';
+import { Box } from '../design-system/Box/Box';
+import { Heading } from '../design-system/Heading/Heading';
+import { Typography } from '../design-system/Typography/Typography';
+import { useTranslation } from '../i18n/useTranslation';
 
 export const ContactContent = () => {
   const { t } = useTranslation();

@@ -14,6 +14,11 @@
     "foo": "readonly"
   },
   "settings": {
+    "jsx-a11y": {
+      "polymorphicPropName": "as",
+      "components": {},
+      "attributes": {}
+    }
   },
   "rules": {
     "eqeqeq": "warn",
