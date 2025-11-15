@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
-import enComposer from '../composer/i18n/en.json';
 
-import enCore from '../core/i18n/en.json';
-import enTimeline from '../timeline/i18n/en.json';
+import enMessages from './en.json';
+import esMessages from './es.json';
+
 import { LocaleProvider, useLocaleContext } from './LocaleProvider';
 
 const messagesByLocale = {
-  en: { ...enCore, ...enComposer, ...enTimeline },
+  en: enMessages,
+  es: esMessages
 } as const;
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => (

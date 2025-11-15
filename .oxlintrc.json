@@ -23,7 +23,8 @@
       {
         "html": false
       }
-    ]
+    ],
+    "react/rules-of-hooks": "error"
   },
   "overrides": [
     {

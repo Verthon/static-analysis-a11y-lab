@@ -15,14 +15,11 @@ const allMessages = {
 export type MessageKey = keyof typeof allMessages;
 type MessageContent<K extends MessageKey> = (typeof allMessages)[K];
 
-// Helper type to check if values are required
 type ValuesRequired<K extends MessageKey> = MessageValues<
   MessageContent<K>
 > extends Record<string, never>
   ? false
   : true;
-
-// Overloaded function signatures for better DX
 interface TranslateFn {
   <K extends MessageKey>(
     key: ValuesRequired<K> extends true ? never : K

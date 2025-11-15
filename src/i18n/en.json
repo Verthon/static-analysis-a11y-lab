@@ -1,0 +1,15 @@
+{
+  "contact.title": "Contact Us",
+  "contact.subtitle": "Get in Touch",
+  "contact.description": "We'd love to hear from you. Whether you have a question about features, pricing, or anything else, our team is ready to answer all your questions.",
+  "contact.address.title": "Our Address",
+  "contact.address.street": "123 Main Street",
+  "contact.address.city": "San Francisco, CA 94102",
+  "contact.email.title": "Email",
+  "contact.email.address": "hello@example.com",
+  "contact.phone.title": "Phone",
+  "contact.phone.number": "+1 (555) 123-4567",
+  "contact.hours.title": "Business Hours",
+  "contact.hours.weekdays": "Monday - Friday: 9:00 AM - 6:00 PM",
+  "contact.hours.weekend": "Saturday - Sunday: Closed"
+}
