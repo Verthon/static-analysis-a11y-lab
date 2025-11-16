@@ -23,10 +23,10 @@ type TagToComponent<T extends string> = T extends keyof JSX.IntrinsicElements
 
 // Build values object type based on message content
 export type MessageValues<T extends string> = (ExtractVariables<T> extends never
-  ? {}
+  ? object
   : Record<ExtractVariables<T>, string | number>) &
   (ExtractTags<T> extends never
-    ? {}
+    ? object
     : Record<ExtractTags<T>, TagToComponent<ExtractTags<T>>>);
 
 // Type for messages that might contain rich text

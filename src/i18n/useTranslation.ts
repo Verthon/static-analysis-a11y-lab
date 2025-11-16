@@ -53,12 +53,24 @@ export const useTranslation = (): UseTranslationReturn => {
   const { locale, setLocale } = useLocaleContext();
   const intl = useIntl();
 
-  const t: TranslateFn = (key: any, values?: any) => {
-    return intl.formatMessage({ id: key }, values);
+  const t: TranslateFn = <K extends MessageKey>(
+    key: K,
+    values?: MessageValues<MessageContent<K>>
+  ) => {
+    return intl.formatMessage(
+      { id: key },
+      values as Record<string, string | number>
+    );
   };
 
-  const formatMessage: FormatMessageFn = (key: any, values?: any) => {
-    return createElement(FormattedMessage, { id: key, values });
+  const formatMessage: FormatMessageFn = <K extends MessageKey>(
+    key: K,
+    values?: MessageValues<MessageContent<K>>
+  ) => {
+    return createElement(FormattedMessage, {
+      id: key,
+      values: values as Record<string, string | number>,
+    });
   };
 
   return { locale, setLocale, t, formatMessage };

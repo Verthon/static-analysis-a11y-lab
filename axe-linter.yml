@@ -1,0 +1,4 @@
+global-components:
+  Heading:
+  attributes:
+    - as: <element>

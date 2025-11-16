@@ -1,11 +1,12 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": [
-    "import",
+    "eslint",
     "typescript",
     "unicorn",
     "jsx-a11y",
-    "react"
+    "react",
+    "react-perf"
   ],
   "env": {
     "browser": true
