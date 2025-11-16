@@ -20,5 +20,19 @@
   "contact.phone.number": "+1 (555) 123-4567",
   "contact.hours.title": "Horario de Atención",
   "contact.hours.weekdays": "Lunes - Viernes: 9:00 AM - 6:00 PM",
-  "contact.hours.weekend": "Sábado - Domingo: Cerrado"
+  "contact.hours.weekend": "Sábado - Domingo: Cerrado",
+  "contact.form.name.label": "Nombre",
+  "contact.form.name.placeholder": "Tu nombre",
+  "contact.form.email.label": "Correo Electrónico",
+  "contact.form.email.placeholder": "tu.correo@ejemplo.com",
+  "contact.form.inquiry.label": "Tipo de Consulta",
+  "contact.form.inquiry.placeholder": "Selecciona el tipo de consulta",
+  "contact.form.inquiry.general": "Consulta General",
+  "contact.form.inquiry.problem": "Problema",
+  "contact.form.inquiry.feedback": "Comentarios",
+  "contact.form.inquiry.other": "Otro",
+  "contact.form.message.label": "Mensaje",
+  "contact.form.message.placeholder": "Tu mensaje",
+  "contact.form.submit": "Enviar Mensaje",
+  "contact.form.success": "¡Mensaje enviado exitosamente!"
 }

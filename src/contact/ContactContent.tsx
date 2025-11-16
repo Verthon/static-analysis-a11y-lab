@@ -3,6 +3,7 @@ import { Heading } from '../design-system/Heading/Heading';
 import { Typography } from '../design-system/Typography/Typography';
 import { useLocale } from '../i18n/useLocale';
 import { usePageMeta } from '../hooks/usePageMeta';
+import { ContactForm } from './ContactForm';
 
 export const ContactContent = () => {
   const { t } = useLocale();
@@ -21,6 +22,10 @@ export const ContactContent = () => {
         <Typography as="p" variant="body">
           {t('contact.description')}
         </Typography>
+      </Box>
+
+      <Box as="section" direction="col">
+        <ContactForm />
       </Box>
 
       <Box as="section" direction="row">

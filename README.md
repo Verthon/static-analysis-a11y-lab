@@ -1,6 +1,7 @@
 # Static Analysis accessibility lab
 
-Idea for this repo is to discover how much static code analysis tools can give developers on IDE level
+Idea for this repo is to discover how much static code analysis tools can give developers on IDE/Terminal level.
+Automating accessibility checks is hard, experts from [Deque](https://www.deque.com/) claim that "Please note that only 20% to 50% of all accessibility issues can automatically be detected."
 
 ## Tooling audited
 
@@ -18,13 +19,20 @@ Idea for this repo is to discover how much static code analysis tools can give d
 
 ### Linters
 
-- ESLint jsx-a11y
+- [ESLint jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
   - big set of rules <https://github.com/jsx-eslint/eslint-plugin-jsx-a11y?tab=readme-ov-file#supported-rules>
   - you can map your custom components Button to button checks etc
-- OXLint jsx-a11y
+- [OXLint jsx-a11y](https://oxc.rs/docs/guide/usage/linter/config-file-reference.html#settings-jsx-a11y)
   - covers everything from ESLint plugin but way faster
-- Biome linter
+- [Biome linter](https://biomejs.dev/linter/)
   - found false positive for PageLoader `role="status"` to use `output` instead (result of a calculation / user action” + form-associated, labelable control)
+- [Storybook a11y](https://storybook.js.org/docs/writing-tests/accessibility-testing#accessibility-checks-with-a11y-addon)
+  - in this repo just static analysis in the a11y tab of Storybook
+
+### CLI
+
+- [Axe CLI](https://github.com/dequelabs/axe-core-npm/blob/develop/packages/cli/README.md)
+  - lacks the ability of Axe Linter to add custom components handling as HTML tags, therefore it is useful for prod builds only
 
 ## Challenges
 
@@ -38,8 +46,9 @@ Static code analysis falls short for accessibility:
 
 ## Next steps
 
-- tests capabilities
-- design systems Storybook a11y linting
+- tests capabilities for regular UI
+- design system Storybook a11y interactive testing
+- browser plugins like [Axe Core](https://www.deque.com/axe/devtools/chrome-browser-extension/) or [Wave](https://wave.webaim.org/extension/)
 
 ## Additional resources
 

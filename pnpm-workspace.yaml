@@ -1,2 +1,3 @@
 onlyBuiltDependencies:
-  - core-js
+  # for the cli https://github.com/dequelabs/axe-core-npm/blob/develop/packages/cli/postinstall.js
+  - chromedriver
