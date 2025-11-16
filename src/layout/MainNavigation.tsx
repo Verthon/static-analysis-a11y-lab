@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 import { Box } from '../design-system/Box/Box';
 import { Typography } from '../design-system/Typography/Typography';
-import { useTranslation } from '../i18n/useTranslation';
 import { routesConfig } from '../routing/routesConfig';
+import { useLocale } from '../i18n/useLocale';
 
 /**
  * Main navigation component with logo and contact link.
@@ -16,10 +16,10 @@ import { routesConfig } from '../routing/routesConfig';
  * - Responsive design for mobile and desktop
  */
 export const MainNavigation = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   return (
-    <Box as="nav" direction="row">
+    <Box as="header" direction="row">
       <Link to={routesConfig.home}>
         <Typography as="span" variant="body">
           {t('nav.logo')}

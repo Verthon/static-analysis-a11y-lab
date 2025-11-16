@@ -1,10 +1,16 @@
 import { Box } from '../design-system/Box/Box';
 import { Heading } from '../design-system/Heading/Heading';
 import { Typography } from '../design-system/Typography/Typography';
-import { useTranslation } from '../i18n/useTranslation';
+import { useLocale } from '../i18n/useLocale';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 export const ContactContent = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
+
+  usePageMeta({
+    title: t('contact.meta.title'),
+    description: t('contact.meta.description'),
+  });
 
   return (
     <Box as="main" direction="col">

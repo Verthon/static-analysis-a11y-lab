@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 import { Box } from '../design-system/Box/Box';
 import { Typography } from '../design-system/Typography/Typography';
-import { useTranslation } from '../i18n/useTranslation';
 import { routesConfig } from '../routing/routesConfig';
+import { useLocale } from '../i18n/useLocale';
 
 /**
  * Main footer component with copyright and contact link.
@@ -14,7 +14,7 @@ import { routesConfig } from '../routing/routesConfig';
  * - Link has accessible text content
  */
 export const MainFooter = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   return (
     <Box as="footer" direction="col">

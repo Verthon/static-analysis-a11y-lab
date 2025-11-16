@@ -1,8 +1,12 @@
 import { memo } from 'react';
-import { useTranslation } from '../../i18n/useTranslation';
+import { useLocale } from '../../i18n/useLocale';
 
+/**
+ * Full-page loading indicator for initial app load and lazy-loaded route chunks.
+ * WCAG 2.0 AA compliant with `role="status"` for screen reader announcement.
+ */
 export const PageLoader = memo(() => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   return (
     <div
