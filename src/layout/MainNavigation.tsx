@@ -19,17 +19,32 @@ export const MainNavigation = () => {
   const { t } = useLocale();
 
   return (
-    <Box as="header" direction="row">
-      <Link to={routesConfig.home}>
+    <Box
+      as="header"
+      direction="row"
+      padding="6"
+      gap="8"
+      alignItems="center"
+      justifyContent="between"
+    >
+      <Link
+        to={routesConfig.home}
+        className="font-semibold text-gray-900 hover:text-blue-800 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 rounded"
+      >
         <Typography as="span" variant="body">
           {t('nav.logo')}
         </Typography>
       </Link>
-      <Link to={routesConfig.contact}>
-        <Typography as="span" variant="body">
-          {t('nav.contact')}
-        </Typography>
-      </Link>
+      <Box as="nav" direction="row" gap="6">
+        <Link
+          to={routesConfig.contact}
+          className="text-gray-600 hover:text-gray-900 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 rounded"
+        >
+          <Typography as="span" variant="body">
+            {t('nav.contact')}
+          </Typography>
+        </Link>
+      </Box>
     </Box>
   );
 };

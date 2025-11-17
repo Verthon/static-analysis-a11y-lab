@@ -14,10 +14,12 @@ export const ContactContent = () => {
   });
 
   return (
-    <Box as="main" direction="col">
-      <Heading as="h1">{t('contact.title')}</Heading>
+    <Box as="main" direction="col" padding="8" gap="12">
+      <Box direction="col" gap="2">
+        <Heading as="h1">{t('contact.title')}</Heading>
+      </Box>
 
-      <Box as="section" direction="col">
+      <Box as="section" direction="col" gap="4">
         <Heading as="h2">{t('contact.subtitle')}</Heading>
         <Typography as="p" variant="body">
           {t('contact.description')}
@@ -28,8 +30,8 @@ export const ContactContent = () => {
         <ContactForm />
       </Box>
 
-      <Box as="section" direction="row">
-        <Box as="article" direction="col">
+      <Box as="section" direction="row" gap="8">
+        <Box as="article" direction="col" gap="2">
           <Heading as="h3">{t('contact.address.title')}</Heading>
           <Typography as="p" variant="small">
             {t('contact.address.street')}
@@ -39,14 +41,14 @@ export const ContactContent = () => {
           </Typography>
         </Box>
 
-        <Box as="article" direction="col">
+        <Box as="article" direction="col" gap="2">
           <Heading as="h3">{t('contact.email.title')}</Heading>
           <Typography as="p" variant="small">
             {t('contact.email.address')}
           </Typography>
         </Box>
 
-        <Box as="article" direction="col">
+        <Box as="article" direction="col" gap="2">
           <Heading as="h3">{t('contact.phone.title')}</Heading>
           <Typography as="p" variant="small">
             {t('contact.phone.number')}
@@ -54,7 +56,7 @@ export const ContactContent = () => {
         </Box>
       </Box>
 
-      <Box as="section" direction="col">
+      <Box as="section" direction="col" gap="2">
         <Heading as="h3">{t('contact.hours.title')}</Heading>
         <Typography as="p" variant="small">
           {t('contact.hours.weekdays')}

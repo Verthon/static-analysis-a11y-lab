@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import { Form } from '@base-ui-components/react/form';
 import { Field } from '@base-ui-components/react/field';
 import { Select } from '@base-ui-components/react/select';
@@ -11,11 +11,36 @@ interface ContactFormData {
   message: string;
 }
 
+type FormState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success' }
+  | { status: 'error'; errors: Record<string, string> };
+
+type FormAction =
+  | { type: 'SUBMIT' }
+  | { type: 'SUCCESS' }
+  | { type: 'ERROR'; errors: Record<string, string> }
+  | { type: 'RESET' };
+
+const formReducer = (state: FormState, action: FormAction): FormState => {
+  switch (action.type) {
+    case 'SUBMIT':
+      return { status: 'loading' };
+    case 'SUCCESS':
+      return { status: 'success' };
+    case 'ERROR':
+      return { status: 'error', errors: action.errors };
+    case 'RESET':
+      return { status: 'idle' };
+    default:
+      return state;
+  }
+};
+
 export const ContactForm = () => {
   const { t } = useLocale();
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [state, dispatch] = useReducer(formReducer, { status: 'idle' });
 
   const inquiryOptions = [
     { value: 'general', label: t('contact.form.inquiry.general') },
@@ -26,36 +51,53 @@ export const ContactForm = () => {
 
   return (
     <Form
-      className="flex w-full max-w-2xl flex-col gap-4"
-      errors={errors}
-      onClearErrors={setErrors}
+      className="flex w-full max-w-2xl flex-col gap-6"
+      errors={state.status === 'error' ? state.errors : {}}
+      onClearErrors={() => dispatch({ type: 'RESET' })}
       onSubmit={async (event) => {
         event.preventDefault();
-        setLoading(true);
-        setSubmitSuccess(false);
+        dispatch({ type: 'SUBMIT' });
 
         const formData = new FormData(event.currentTarget);
+
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const inquiryType = formData.get('inquiryType');
+        const message = formData.get('message');
+
+        if (
+          typeof name !== 'string' ||
+          typeof email !== 'string' ||
+          typeof inquiryType !== 'string' ||
+          typeof message !== 'string'
+        ) {
+          dispatch({
+            type: 'ERROR',
+            errors: { form: 'Invalid form data' },
+          });
+          return;
+        }
+
         const data: ContactFormData = {
-          name: formData.get('name') as string,
-          email: formData.get('email') as string,
-          inquiryType: formData.get('inquiryType') as string,
-          message: formData.get('message') as string,
+          name,
+          email,
+          inquiryType,
+          message,
         };
 
         await new Promise((resolve) => setTimeout(resolve, 800));
 
         console.log('Form submitted:', data);
-        setLoading(false);
-        setSubmitSuccess(true);
+        dispatch({ type: 'SUCCESS' });
 
         event.currentTarget.reset();
 
         setTimeout(() => {
-          setSubmitSuccess(false);
+          dispatch({ type: 'RESET' });
         }, 3000);
       }}
     >
-      <Field.Root name="name" className="flex flex-col items-start gap-1">
+      <Field.Root name="name" className="flex flex-col items-start gap-2">
         <Field.Label className="text-sm font-medium text-gray-900">
           {t('contact.form.name.label')}
         </Field.Label>
@@ -63,12 +105,12 @@ export const ContactForm = () => {
           type="text"
           required
           placeholder={t('contact.form.name.placeholder')}
-          className="h-10 w-full rounded-md border border-gray-200 pl-3.5 text-base text-gray-900 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800"
+          className="h-11 w-full rounded-md border border-gray-300 px-4 text-base text-gray-900 transition-colors hover:border-gray-400 focus:border-blue-800 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800"
         />
         <Field.Error className="text-sm text-red-800" />
       </Field.Root>
 
-      <Field.Root name="email" className="flex flex-col items-start gap-1">
+      <Field.Root name="email" className="flex flex-col items-start gap-2">
         <Field.Label className="text-sm font-medium text-gray-900">
           {t('contact.form.email.label')}
         </Field.Label>
@@ -76,17 +118,17 @@ export const ContactForm = () => {
           type="email"
           required
           placeholder={t('contact.form.email.placeholder')}
-          className="h-10 w-full rounded-md border border-gray-200 pl-3.5 text-base text-gray-900 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800"
+          className="h-11 w-full rounded-md border border-gray-300 px-4 text-base text-gray-900 transition-colors hover:border-gray-400 focus:border-blue-800 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800"
         />
         <Field.Error className="text-sm text-red-800" />
       </Field.Root>
 
-      <Field.Root name="inquiryType" className="flex flex-col items-start gap-1">
+      <Field.Root name="inquiryType" className="flex flex-col items-start gap-2">
         <Field.Label className="text-sm font-medium text-gray-900">
           {t('contact.form.inquiry.label')}
         </Field.Label>
         <Select.Root name="inquiryType" items={inquiryOptions} required>
-          <Select.Trigger className="flex h-10 w-full items-center justify-between gap-3 rounded-md border border-gray-200 pr-3 pl-3.5 text-base text-gray-900 select-none hover:bg-gray-100 focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 data-popup-open:bg-gray-100 cursor-default">
+          <Select.Trigger className="flex h-11 w-full items-center justify-between gap-3 rounded-md border border-gray-300 px-4 text-base text-gray-900 select-none transition-colors hover:border-gray-400 hover:bg-gray-50 focus-visible:border-blue-800 focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 data-popup-open:bg-gray-50 cursor-default">
             <Select.Value />
             <Select.Icon className="flex">▼</Select.Icon>
           </Select.Trigger>
@@ -112,7 +154,7 @@ export const ContactForm = () => {
         <Field.Error className="text-sm text-red-800" />
       </Field.Root>
 
-      <Field.Root name="message" className="flex flex-col items-start gap-1">
+      <Field.Root name="message" className="flex flex-col items-start gap-2">
         <Field.Label className="text-sm font-medium text-gray-900">
           {t('contact.form.message.label')}
         </Field.Label>
@@ -123,7 +165,7 @@ export const ContactForm = () => {
               required
               rows={5}
               placeholder={t('contact.form.message.placeholder')}
-              className="w-full rounded-md border border-gray-200 px-3.5 py-2 text-base text-gray-900 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800 resize-vertical"
+              className="w-full rounded-md border border-gray-300 px-4 py-3 text-base text-gray-900 transition-colors hover:border-gray-400 focus:border-blue-800 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-800 resize-vertical"
             />
           )}
         />
@@ -131,15 +173,15 @@ export const ContactForm = () => {
       </Field.Root>
 
       <button
-        disabled={loading}
+        disabled={state.status === 'loading'}
         type="submit"
-        className="flex h-10 items-center justify-center rounded-md border border-gray-200 bg-gray-50 px-3.5 text-base font-medium text-gray-900 select-none hover:bg-gray-100 focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-blue-800 active:bg-gray-100 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400"
+        className="flex h-12 items-center justify-center rounded-md border border-gray-300 bg-gray-900 px-6 text-base font-medium text-white select-none transition-colors hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 active:bg-gray-950 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
       >
-        {loading ? t('common.loading') : t('contact.form.submit')}
+        {state.status === 'loading' ? t('common.loading') : t('contact.form.submit')}
       </button>
 
-      {submitSuccess && (
-        <output className="p-3 bg-green-100 text-green-800 rounded-md text-sm">
+      {state.status === 'success' && (
+        <output className="p-4 bg-green-100 text-green-900 rounded-md text-base font-medium border border-green-300">
           {t('contact.form.success')}
         </output>
       )}

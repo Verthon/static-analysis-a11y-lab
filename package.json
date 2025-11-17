@@ -9,12 +9,16 @@
     "lint:ox": "oxlint",
     "lint:es": "eslint",
     "lint:bi": "biome lint",
-    "lint": "pnpm run lint:ox && pnpm run lint:es && lint:bi",
+    "lint": "pnpm run lint:ox && pnpm run lint:es && pnpm run lint:bi",
     "a11y:prepare": "pnpm run build && pnpm run preview",
     "a11y": "axe http://localhost:3000",
     "preview": "rsbuild preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "audit": "python3 .a11y-audit/a11y-auditor/scripts/audit.py src/",
+    "audit:watch": "nodemon --watch src --ext tsx,jsx --exec 'npm run audit'",
+    "audit:json": "python3 .a11y-audit/a11y-auditor/scripts/audit.py src/ --json audit-report.json",
+    "audit:component": "python3 .a11y-audit/a11y-auditor/scripts/audit.py"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",

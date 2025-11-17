@@ -17,9 +17,18 @@ export const MainFooter = () => {
   const { t } = useLocale();
 
   return (
-    <Box as="footer" direction="col">
-      <Box as="nav" direction="row">
-        <Link to={routesConfig.contact}>
+    <Box
+      as="footer"
+      direction="col"
+      gap="4"
+      padding="8"
+      alignItems="center"
+    >
+      <Box as="nav" direction="row" gap="6">
+        <Link
+          to={routesConfig.contact}
+          className="text-gray-600 hover:text-gray-900 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 rounded"
+        >
           <Typography as="span" variant="small">
             {t('footer.contact')}
           </Typography>
